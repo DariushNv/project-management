@@ -11,8 +11,10 @@ function registerValidator(){
                     return true
                 }
                 throw "Username is not valid"
+            }else{
+                throw "Username can not be empty"
             }
-            throw "Username can not be empty"
+            
         }),
         body("email").isEmail().withMessage("Email is not valid")
         .custom(async email => {
@@ -34,6 +36,19 @@ function registerValidator(){
         })
     ]
 }
+function loginValidation(){
+    return [
+        body("username").notEmpty().withMessage("username can not be empty").custom(username =>{
+        const usernameRegex = /^[a-z]+[a-z0-9\_\.]{2,}/gi
+        if(usernameRegex.test(username)){
+            return true
+        }
+        throw "Username is not valid"
+        }),
+        body("password").isLength({min: 6 , max: 16}).withMessage("password is must be between 6 and 16 characters")
+    ]
+}
 module.exports = {
-    registerValidator
+    registerValidator,
+    loginValidation
 }

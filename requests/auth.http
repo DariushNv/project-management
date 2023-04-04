@@ -10,3 +10,15 @@ Content-Type: application/json
     "password": "",
     "confirm_password": ""
 }
+
+###login request
+Send Request
+Post http://localhost:3000/auth/login
+Content-Type: application/json
+Authorization : {{$dotenv TOKEN}}
+
+{
+    "username": "",
+    "password": ""
+    
+}
